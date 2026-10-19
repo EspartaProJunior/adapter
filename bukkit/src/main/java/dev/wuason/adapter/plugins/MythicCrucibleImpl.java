@@ -47,7 +47,15 @@ public class MythicCrucibleImpl extends AdapterComp {
 
     @Override
     public String getAdapterId(Entity entity) {
-        return MythicCrucible.inst().getItemManager().getFurnitureManager().getFurniture(entity.getUniqueId()).map(furniture -> Utils.convert(getType(), furniture.getFurnitureData().getItem().getInternalName())).orElse(null);
+        return MythicCrucible.inst()
+                .getItemManager()
+                .getFurnitureManager()
+                .getFurniture(BukkitAdapter.adapt(entity))
+                .map(furniture -> Utils.convert(
+                        getType(),
+                        furniture.getFurnitureData().getItem().getInternalName()
+                ))
+                .orElse(null);
     }
 
     @Override

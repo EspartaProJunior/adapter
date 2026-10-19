@@ -5,6 +5,7 @@ import dev.wuason.adapter.Utils;
 import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks;
 import net.momirealms.craftengine.bukkit.api.CraftEngineFurniture;
 import net.momirealms.craftengine.bukkit.api.CraftEngineItems;
+import net.momirealms.craftengine.bukkit.item.BukkitItemDefinition;
 import net.momirealms.craftengine.core.util.Key;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -25,7 +26,7 @@ public class CraftEngineImpl extends AdapterComp {
     public ItemStack getAdapterItem(String id) {
         String[] split = id.split(":");
         return split.length < 2 ? null : Optional.ofNullable(CraftEngineItems.byId(Key.of(split)))
-                .map(item -> item.buildBukkitItem())
+                .map(BukkitItemDefinition::buildBukkitItem)
                 .orElse(null);
     }
 
@@ -57,8 +58,6 @@ public class CraftEngineImpl extends AdapterComp {
     public String getAdvancedAdapterId(Block block) {
         return getAdapterId(block);
     }
-
-
 
     @Override
     public String getAdvancedAdapterId(Entity entity) {
